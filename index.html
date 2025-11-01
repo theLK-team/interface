@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard with Cookie Clicker</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #4CAF50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+    }
+    #cookie {
+        width: 200px;
+        cursor: pointer;
+        margin: 2rem 0;
+    }
+    .stats {
+        font-size: 1.2rem;
+        margin: 1rem 0;
+    }
+    button {
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>My Dashboard</h1>
+</header>
+
+<main>
+    <h2>Cookie Clicker</h2>
+    <img id="cookie" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Cookie_icon.png" alt="Cookie">
+    <div class="stats">
+        Cookies: <span id="cookieCount">0</span>
+    </div>
+    <div>
+        <button onclick="buyCursor()">Buy Cursor (10 cookies)</button>
+        <span>Cursors: <span id="cursors">0</span></span>
+    </div>
+</main>
+
+<script>
+let cookies = 0;
+let cursors = 0;
+const cookieCountEl = document.getElementById('cookieCount');
+const cursorsEl = document.getElementById('cursors');
+const cookie = document.getElementById('cookie');
+
+cookie.addEventListener('click', () => {
+    cookies++;
+    updateDisplay();
+});
+
+function buyCursor() {
+    if (cookies >= 10) {
+        cookies -= 10;
+        cursors++;
+        updateDisplay();
+    } else {
+        alert("Not enough cookies!");
+    }
+}
+
+function updateDisplay() {
+    cookieCountEl.textContent = cookies;
+    cursorsEl.textContent = cursors;
+}
+
+// Automatically generate cookies for cursors
+setInterval(() => {
+    cookies += cursors;
+    updateDisplay();
+}, 1000);
+</script>
+
+</body>
+</html>
